@@ -663,6 +663,7 @@ def link_benchmark(bench):
         log.debug('Linking in directory {abs_bd_b}'.format(abs_bd_b=abs_bd_b))
         log.debug(arglist_to_str(arglist))
 
+    res = ""
     try:
         res = subprocess.run(
             arglist,
@@ -676,6 +677,7 @@ def link_benchmark(bench):
             succeeded = False
     except subprocess.TimeoutExpired:
         log.warning('Warning: link of benchmark "{bench}" timed out'.format(bench=bench))
+        res = 'Exception: time out on subprocessing'
         succeeded = False
 
     if not succeeded:
